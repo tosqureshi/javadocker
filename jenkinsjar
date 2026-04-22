@@ -4,19 +4,18 @@ pipeline {
     stages {
         stage('install maven') {
             steps {
-                sh sudo dnf install maven -y
+               sh 'sudo dnf install maven -y'
             }
         }
-        stage('create maven package') {
+     stage('creation of package') {
             steps {
-                sh 'mvn clean package'
+             sh 'mvn clean package'
             }
         }
-        stage('archive artifacts') {
+     stage('releasing pacakge') {
             steps {
-                archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
+             archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
             }
         }
     }
 }
-

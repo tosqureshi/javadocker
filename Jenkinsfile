@@ -5,6 +5,7 @@ stage('chckout scm') {
 steps {
 checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/hellokaton/java11-examples.git']])
 }
+    
 }
 stage('Install sonarqube cli') {
 steps {

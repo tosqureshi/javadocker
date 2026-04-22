@@ -15,6 +15,7 @@ pipeline {
      stage('releasing pacakge') {
             steps {
              archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
+            mail bcc: '', body: 'Check', cc: '', from: '', replyTo: '', subject: 'Pipeline Notification', to: 'tosifq1809@gmail.com'
             }
         }
     }

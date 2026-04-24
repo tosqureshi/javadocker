@@ -15,7 +15,19 @@ pipeline {
      stage('releasing pacakge') {
             steps {
              archiveArtifacts artifacts: 'target/*.jar', followSymlinks: false
-            mail bcc: '', body: 'Check', cc: '', from: '', replyTo: '', subject: 'Pipeline Notification', to: 'tosifq1809@gmail.com'
+            // mail bcc: '', body: 'Check', cc: '', from: '', replyTo: '', subject: 'Pipeline Notification', to: 'tosifq1809@gmail.com'
+            }
+        }
+        stage('Install sonarqube cli') {
+            steps {
+            // Step to install SonarQube CLI
+            sh 'sudo wget -O sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-5.0.1.3006-linux.zip'
+            sh 'sudo unzip -o -q sonar-scanner.zip'
+            sh 'sudo rm -rf /opt/sonar-scanner'
+            sh 'sudo mv --force sonar-scanner-5.0.1.3006-linux /opt/sonar-scanner'
+            sh 'sudo sh -c \'echo "#/bin/bash \nexport PATH=\\\"$PATH:/opt/sonar-scanner/bin\\\"" >/etc/profile.d/sonar-scanner.sh\''
+            sh 'sudo chmod +x /opt/sonar-scanner/bin/sonar-scanner'
+            sh '. /etc/profile.d/sonar-scanner.sh'
             }
         }
     }

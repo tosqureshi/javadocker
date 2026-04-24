@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-      label 'mylinux'
-    }
+    agent any
 
     stages {
         stage('installation maven') {
